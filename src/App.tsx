@@ -10,6 +10,15 @@ function App() {
 	return (
 		<div className="App">
 			<Wrapper>
+				<WrapperDisplay>
+					<input type="text"/>
+					<input type="text"/>
+				</WrapperDisplay>
+				<WrapperButtons>
+					<Button>Inc</Button>
+				</WrapperButtons>
+			</Wrapper>
+			<Wrapper>
 				<WrapperDisplay current={count} max={max}>
 					<h3>{count}</h3>
 				</WrapperDisplay>

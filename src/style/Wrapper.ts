@@ -14,9 +14,9 @@ export const Wrapper = styled.div`
 export const WrapperDisplay = styled(Wrapper)<IWrapperDisplay>`
   width: 100%;
   height: 160px;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
+  row-gap: 15px;
   color: ${({current, max}) => current === max ? 'darkred' : 'rgb(8 126 164)'};
 
   h3 {
@@ -34,6 +34,6 @@ export const WrapperButtons = styled(Wrapper)`
 `
 
 interface IWrapperDisplay {
-	current: number
-	max: number
+	current?: number
+	max?: number
 }
