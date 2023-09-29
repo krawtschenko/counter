@@ -1,29 +1,21 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Wrapper, WrapperButtons, WrapperDisplay} from "./style/Wrappers";
+import {Wrapper, WrapperButtons, WrapperDisplay} from "./style/Wrapper";
 import {Button} from "./style/Button";
 
 function App() {
-	const [count, setCount] = useState(0)
+	const [count, setCount] = useState<number>(0)
 	const min = 0, max = 5
-
-	function increment() {
-		setCount(count => count + 1)
-	}
-
-	function reset() {
-		setCount(min)
-	}
 
 	return (
 		<div className="App">
 			<Wrapper>
 				<WrapperDisplay current={count} max={max}>
-					{count}
+					<h3>{count}</h3>
 				</WrapperDisplay>
 				<WrapperButtons>
-					<Button disabled={count === max} onClick={increment}>Inc</Button>
-					<Button disabled={count === min} onClick={reset}>Reset</Button>
+					<Button disabled={count === max} onClick={() => setCount(count => count + 1)}>Inc</Button>
+					<Button disabled={count === min} onClick={() => setCount(min)}>Reset</Button>
 				</WrapperButtons>
 			</Wrapper>
 		</div>

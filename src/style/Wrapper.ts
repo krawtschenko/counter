@@ -4,26 +4,32 @@ export const Wrapper = styled.div`
   padding: 10px;
   width: 400px;
   height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: 2px rgb(8 126 164) solid;
   border-radius: 10px;
 `
 
 export const WrapperDisplay = styled(Wrapper)<IWrapperDisplay>`
-  padding: 20px 10px;
   width: 100%;
   height: 160px;
-  text-align: center;
-  font-size: 80px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   color: ${({current, max}) => current === max ? 'darkred' : 'rgb(8 126 164)'};
+
+  h3 {
+    font-size: 80px;
+  }
 `
 
 export const WrapperButtons = styled(Wrapper)`
   width: 100%;
-  margin-top: 10px;
-  padding: 30px 20px 30px;
   height: 105px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   column-gap: 20px;
 `
 
