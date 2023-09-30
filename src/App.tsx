@@ -9,6 +9,9 @@ function App() {
 	const [count, setCount] = useState<number>(input.min)
 	const [text, setText] = useState<string | null>(null)
 
+	const verificationMin = (input.min >= input.max) || (input.min < 0)
+	const verificationMax = (input.max <= input.min) || (input.max < 0)
+
 	function increment() {
 		setCount(prevState => prevState + 1)
 	}
@@ -18,13 +21,15 @@ function App() {
 	}
 
 	function changeInputValueMin(value: ChangeEvent<HTMLInputElement>) {
-		setInput({min: Number(value.currentTarget.value), max: input.max})
-		setText('Click Set')
+		const newValue = Number(value.currentTarget.value)
+		setInput({min: newValue, max: input.max})
+		newValue < 0 || newValue >= input.max ? setText('Error') : setText('Click Set')
 	}
 
 	function changeInputValueMax(value: ChangeEvent<HTMLInputElement>) {
-		setInput({min: input.min, max: Number(value.currentTarget.value)})
-		setText('Click Set')
+		const newValue = Number(value.currentTarget.value)
+		setInput({min: input.min, max: newValue})
+		newValue <= 0 || newValue <= input.min ? setText('Error') : setText('Click Set')
 	}
 
 	function setValue() {
@@ -32,22 +37,25 @@ function App() {
 		setText(null)
 	}
 
-	const verificationMin = (input.min >= input.max) || (input.min < 0)
-	const verificationMax = input.max < 0
-
 	return (
 		<div className="App">
 			<Wrapper>
 				<WrapperDisplay>
-					<Input onChange={(event) => changeInputValueMin(event)} value={input.min} verification={verificationMin}/>
-					<Input onChange={(event) => changeInputValueMax(event)} value={input.max} verification={verificationMax}/>
+					<div>
+						<h4>Min</h4>
+						<Input onChange={(event) => changeInputValueMin(event)} value={input.min} verification={verificationMin}/>
+					</div>
+					<div>
+						<h4>Max</h4>
+						<Input onChange={(event) => changeInputValueMax(event)} value={input.max} verification={verificationMax}/>
+					</div>
 				</WrapperDisplay>
 				<WrapperButtons>
 					<Button disabled={verificationMin || verificationMax} onClick={setValue}>Set</Button>
 				</WrapperButtons>
 			</Wrapper>
 			<Wrapper>
-				<WrapperDisplay current={count} max={input.max}>
+				<WrapperDisplay current={count} max={input.max} verification={verificationMin || verificationMax}>
 					<h3>
 						{text || count}
 					</h3>

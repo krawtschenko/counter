@@ -17,10 +17,23 @@ export const WrapperDisplay = styled(Wrapper)<IWrapperDisplay>`
   align-items: center;
   justify-content: center;
   row-gap: 15px;
-  color: ${({current, max}) => current === max ? 'darkred' : 'rgb(8 126 164)'};
+  color: ${({current, max, verification}) => current === max || verification ? 'darkred' : 'rgb(8 126 164)'};
 
   h3 {
     font-size: 80px;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 30px;
+    color: rgb(8 126 164);
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 `
 
@@ -36,4 +49,5 @@ export const WrapperButtons = styled(Wrapper)`
 interface IWrapperDisplay {
 	current?: number
 	max?: number
+	verification?: boolean
 }
