@@ -12,22 +12,14 @@ function App() {
 	const verificationMin = (input.min >= input.max) || (input.min < 0)
 	const verificationMax = (input.max <= input.min) || (input.max < 0)
 
-	function increment() {
-		setCount(prevState => prevState + 1)
-	}
-
-	function reset() {
-		setCount(input.min)
-	}
-
-	function changeInputValueMin(value: ChangeEvent<HTMLInputElement>) {
+	function changeInputValue(value: ChangeEvent<HTMLInputElement>, whatChange: 'min' | 'max') {
 		const newValue = Number(value.currentTarget.value)
-		setInput({min: newValue, max: input.max})
-	}
 
-	function changeInputValueMax(value: ChangeEvent<HTMLInputElement>) {
-		const newValue = Number(value.currentTarget.value)
-		setInput({min: input.min, max: newValue})
+		if (whatChange === 'min') {
+			setInput({min: newValue, max: input.max})
+		} else {
+			setInput({min: input.min, max: newValue})
+		}
 	}
 
 	function setValue() {
@@ -46,8 +38,8 @@ function App() {
 							</h3>
 						</WrapperDisplay>
 						<WrapperButtons>
-							<Button disabled={(count === input.max)} onClick={increment}>Inc</Button>
-							<Button disabled={(count === input.min)} onClick={reset}>Reset</Button>
+							<Button disabled={(count === input.max)} onClick={() => setCount(prevState => prevState + 1)}>Inc</Button>
+							<Button disabled={(count === input.min)} onClick={() => setCount(input.min)}>Reset</Button>
 							<Button onClick={() => setMode('Settings')}>Set</Button>
 						</WrapperButtons>
 					</>
@@ -55,12 +47,12 @@ function App() {
 						<WrapperDisplay>
 							<div>
 								<h4>Min</h4>
-								<Input onChange={(event) => changeInputValueMin(event)} value={input.min}
+								<Input onChange={(event) => changeInputValue(event, 'min')} value={input.min}
 								       verification={verificationMin}/>
 							</div>
 							<div>
 								<h4>Max</h4>
-								<Input onChange={(event) => changeInputValueMax(event)} value={input.max}
+								<Input onChange={(event) => changeInputValue(event, "max")} value={input.max}
 								       verification={verificationMax}/>
 							</div>
 						</WrapperDisplay>
