@@ -1,8 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
 import './App.css';
-import {Wrapper, WrapperButtons, WrapperDisplay} from "./style/Wrapper";
-import {Button} from "./style/Button";
-import {Input} from "./style/Input";
+import {Wrapper, WrapperButtons, WrapperDisplay} from "../style/Wrapper";
+import {Button} from "../style/Button";
+import {Input} from "../style/Input";
 
 function App() {
 	const [input, setInput] = useState({min: 0, max: 5})
