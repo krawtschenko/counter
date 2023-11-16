@@ -5,17 +5,19 @@ export interface IInput {
 	max: number
 }
 
-export const inputReducer = (state: IInput, action: ActionType) => {
+const initialState: IInput = {min: 0, max: 5}
+
+export const inputReducer = (state = initialState, action: ActionType) => {
 	switch (action.type) {
 		case 'MIN':
-			return {...state, min: state.min + 1}
+			return {...state, min: action.payload.value}
 		case 'MAX':
-			return {...state, max: state.max + 1}
+			return {...state, max: action.payload.value}
 		default:
 			return state
 	}
 }
 
-export const changeMin = () => ({type: 'MIN' as const})
+export const changeMin = (value: number) => ({type: 'MIN' as const, payload: {value}})
 
-export const changeMax = () => ({type: 'MAX' as const})
+export const changeMax = (value: number) => ({type: 'MAX' as const, payload: {value}})
