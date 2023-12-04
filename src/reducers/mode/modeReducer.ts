@@ -2,7 +2,7 @@ type ActionType = ReturnType<typeof changeMode>
 
 const initialState = 'Counter' as 'Counter' | 'Settings'
 
-export const modeReducer = (state = initialState, action: ActionType) => {
+export const modeReducer = (state = initialState, action: ActionType): 'Counter' | 'Settings' => {
 	switch (action.type) {
 		case 'MODE':
 			return action.payload.mode
